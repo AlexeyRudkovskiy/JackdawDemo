@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Entities\PostEntity;
 use App\Entities\TagEntity;
+use App\Entities\VideoEntity;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Jackdaw\Contracts\DashboardContract;
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register()
     {
@@ -22,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         $dashboard = $this->app->make(DashboardContract::class);
         $dashboard
             ->addEntity(new PostEntity())
-            ->addEntity(new TagEntity())
+            ->addEntity(new VideoEntity())
             ->setSidebarBuilder(function (Collection $entities) {
                 return $entities->groupBy(function (EntityContract $entityContract) {
                     return $entityContract->getSidebarSectionName();

@@ -18,6 +18,10 @@
         box-shadow: 0 3px 6px rgba(black, 0.25);
     }
 
+    .section-content-header-label {
+        margin-bottom: $default-padding;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         margin-top: 0;
         margin-bottom: 0;
@@ -58,6 +62,10 @@
 
             .widget-secondary-text {
                 font-size: 1rem;
+            }
+
+            .widget-primary-text, .widget-secondary-text {
+                margin-right: $default-padding * 2;
             }
 
             .counter {

@@ -610,6 +610,10 @@ h2 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
 
+.section-content-header .section-content-header-label {
+  margin-bottom: 16px;
+}
+
 .section-content-header h1,
 .section-content-header h2,
 .section-content-header h3,
@@ -661,6 +665,11 @@ h2 {
 
 .section-content-header .widgets .widget .widget-secondary-text {
   font-size: 1rem;
+}
+
+.section-content-header .widgets .widget .widget-primary-text,
+.section-content-header .widgets .widget .widget-secondary-text {
+  margin-right: 32px;
 }
 
 .section-content-header .widgets .widget .counter {

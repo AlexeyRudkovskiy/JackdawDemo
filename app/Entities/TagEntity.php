@@ -6,10 +6,11 @@ namespace App\Entities;
 
 use App\Tag;
 use Illuminate\Support\Collection;
+use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
 use Jackdaw\Fields\TextField;
 
-class TagEntity implements EntityContract
+class TagEntity extends AbstractEntity
 {
 
     /**
