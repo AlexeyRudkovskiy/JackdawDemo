@@ -83,7 +83,7 @@
         display: flex;
 
         a {
-            display: block;
+            display: inline-flex;
             align-items: center;
 
             text-decoration: none;
@@ -96,10 +96,27 @@
                 background-color: white;
                 color: var(--text-base);
                 box-shadow: 0 3px 12px rgba(black, 0.5);
+
+                .badge {
+                    background-color: $blue-color;
+                }
             }
 
             &:last-child {
                 margin-right: 0;
+            }
+
+            .badge {
+                margin-left: $default-padding / 4 * 3;
+                font-size: 10px;
+                display: block;
+                padding: 4px 8px;
+                color: white;
+                border-radius: 16px;
+                margin-top: -2px;
+                background-color: var(--text-base);
+                box-shadow: 0 3px 6px rgba(black, 0.25);
+                text-shadow: 0 0 3px rgba(black, 0.25);
             }
         }
     }

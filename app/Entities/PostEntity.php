@@ -18,7 +18,7 @@ class PostEntity extends AbstractEntity
 
     public function config()
     {
-        /// todo: additional entity configuration
+
     }
 
     /**
@@ -73,6 +73,11 @@ class PostEntity extends AbstractEntity
                 'api' => true,
                 'apiMethods' => [ 'index' ],
                 'rootModel' => $this->getModel()
+            ], [
+                'entity' => VideoEntity::class,
+                'api' => true,
+                'apiMethods' => [ 'index' ],
+                'rootModel' => $this->getModel()
             ]
         ];
     }
@@ -113,13 +118,13 @@ class PostEntity extends AbstractEntity
 
         return [
             (new NavigationLink())
-                ->setBadge(0)
+                ->setBadge(20)
                 ->setTitle('hello world')
                 ->setUrl(route('dashboard.posts.hello-world'))
                 ->setIsActive($currentPage === 'dashboard.posts.hello-world')
                 ->setPosition('tabs'),
             (new NavigationLink())
-                ->setBadge(0)
+                ->setBadge(59)
                 ->setTitle('Settings')
                 ->setUrl(route('dashboard.posts.settings'))
                 ->setIsActive($currentPage === 'dashboard.posts.settings')

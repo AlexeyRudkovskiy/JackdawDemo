@@ -686,7 +686,7 @@ h2 {
 }
 
 .section-content-header .tabs a {
-  display: block;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
   padding: 12px 24px;
@@ -704,8 +704,25 @@ h2 {
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
 }
 
+.section-content-header .tabs a.active .badge {
+  background-color: #3498db;
+}
+
 .section-content-header .tabs a:last-child {
   margin-right: 0;
+}
+
+.section-content-header .tabs a .badge {
+  margin-left: 12px;
+  font-size: 10px;
+  display: block;
+  padding: 4px 8px;
+  color: white;
+  border-radius: 16px;
+  margin-top: -2px;
+  background-color: var(--text-base);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
 }
 
 h1 {

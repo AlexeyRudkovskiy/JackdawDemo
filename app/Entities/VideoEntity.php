@@ -7,6 +7,7 @@ namespace App\Entities;
 use App\Video;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
+use Jackdaw\DashboardComponents\NavigationLink;
 use Jackdaw\Fields\TextField;
 
 class VideoEntity extends AbstractEntity
@@ -47,11 +48,35 @@ class VideoEntity extends AbstractEntity
         return 'entities';
     }
 
+    public function getNavigation(): array
+    {
+        return [
+            (new NavigationLink())
+                ->setBadge(0)
+                ->setIsActive(false)
+                ->setPosition('tabs')
+                ->setTitle('All Videos')
+                ->setUrl('/'),
+            (new NavigationLink())
+                ->setBadge(0)
+                ->setIsActive(true)
+                ->setPosition('tabs')
+                ->setTitle('Popular')
+                ->setUrl('/'),
+            (new NavigationLink())
+                ->setBadge(0)
+                ->setIsActive(false)
+                ->setPosition('tabs')
+                ->setTitle('Newest')
+                ->setUrl('/')
+        ];
+    }
+
     public function getApiConfig(): array
     {
         return [
-            'api' => false,
-            'apiMethods' => []
+            'api' => true,
+            'apiMethods' => [ 'index', 'show' ]
         ];
     }
 }
