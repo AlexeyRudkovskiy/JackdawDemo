@@ -689,13 +689,16 @@ h2 {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  padding: 12px 24px;
+  padding: 16px 24px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   color: var(--text-color);
   border-radius: 3px 3px 0 0;
+  height: 46px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .section-content-header .tabs a.active {

@@ -8,6 +8,8 @@ use App\Tag;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
+use Jackdaw\Contracts\EntityShowMode;
+use Jackdaw\Fields\IdField;
 use Jackdaw\Fields\TextField;
 
 class TagEntity extends AbstractEntity
@@ -19,7 +21,7 @@ class TagEntity extends AbstractEntity
     public function getFields(): Collection
     {
         return collect([])
-            ->push(new TextField("id"))
+            ->push(new IdField("id"))
             ->push(new TextField("text"))
             ->push(new TextField("slug"))
             ;
@@ -37,9 +39,14 @@ class TagEntity extends AbstractEntity
         return [ 'id', 'text', 'slug' ];
     }
 
+    public function getShowMode(): string
+    {
+        return EntityShowMode::DETAILS;
+    }
+
     public function getTranslations(): array
     {
-        return [];
+        return trans('dashboard.tags');
     }
 
     public function getShortName()

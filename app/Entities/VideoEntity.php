@@ -7,6 +7,7 @@ namespace App\Entities;
 use App\Video;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
+use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\DashboardComponents\NavigationLink;
 use Jackdaw\Fields\TextField;
 
@@ -33,6 +34,11 @@ class VideoEntity extends AbstractEntity
         return [ 'id', 'title' ];
     }
 
+    public function getShowMode(): string
+    {
+        return EntityShowMode::DETAILS;
+    }
+
     public function getTranslations(): array
     {
         return trans('dashboard.videos');
@@ -48,7 +54,7 @@ class VideoEntity extends AbstractEntity
         return 'entities';
     }
 
-    public function getNavigation(): array
+    public function getNavigation($recordId): array
     {
         return [
             (new NavigationLink())

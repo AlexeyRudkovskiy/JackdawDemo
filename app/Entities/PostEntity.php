@@ -8,8 +8,10 @@ use App\Post;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
+use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\Contracts\FieldContract;
 use Jackdaw\DashboardComponents\Card;
+use Jackdaw\Fields\IdField;
 use Jackdaw\Fields\TextField;
 use Jackdaw\DashboardComponents\NavigationLink;
 
@@ -27,18 +29,30 @@ class PostEntity extends AbstractEntity
     public function getFields(): Collection
     {
         return collect([])
-            ->add(new TextField("id"))
+            ->add(new IdField("id"))
             ->add(new TextField("title"));
     }
 
     public function getEditableFields(): array
     {
-        return [ 'title' ];
+        return [
+            'content' => [
+                'title'
+            ],
+            'sidebar' => [
+                'title'
+            ]
+        ];
     }
 
     public function getTableFields(): array
     {
         return [ 'id', 'title' ];
+    }
+
+    public function getShowMode(): string
+    {
+        return EntityShowMode::EDIT;
     }
 
     public function getTranslations(): array
@@ -103,6 +117,19 @@ class PostEntity extends AbstractEntity
             return view('dashboard.settings')
                 ->with('entity', $this);
         })->name('settings');
+
+        \Route::get('/{post}/statistics', function (int $postId) {
+            $this->buildTabs();
+
+            $post = Post::findOrFail($postId);
+
+            return view('dashboard.page.posts.statistics')
+                    ->with('entity', $this)
+                    ->with('rootEntity', $this)
+                    ->with('rootObject', $post)
+                    ->with('post', $post)
+                ;
+        })->name('statistics');
     }
 
     public function bindAdditionalApiRoutes()
@@ -112,7 +139,7 @@ class PostEntity extends AbstractEntity
         });
     }
 
-    public function getNavigation(): array
+    public function getNavigation($recordId): array
     {
         $currentPage = request()->route()->getName();
 
@@ -122,13 +149,19 @@ class PostEntity extends AbstractEntity
                 ->setTitle('hello world')
                 ->setUrl(route('dashboard.posts.hello-world'))
                 ->setIsActive($currentPage === 'dashboard.posts.hello-world')
-                ->setPosition('tabs'),
+                ->setPosition('tabs.index'),
             (new NavigationLink())
                 ->setBadge(59)
                 ->setTitle('Settings')
                 ->setUrl(route('dashboard.posts.settings'))
                 ->setIsActive($currentPage === 'dashboard.posts.settings')
-                ->setPosition('tabs')
+                ->setPosition('tabs.index'),
+            (new NavigationLink())
+                ->setBadge(0)
+                ->setTitle('Statistics')
+                ->setUrl(route('dashboard.posts.statistics', [ 'post' => 1 ]))
+                ->setIsActive($currentPage === 'dashboard.posts.statistics')
+                ->setPosition('tabs.show'),
         ];
     }
 
