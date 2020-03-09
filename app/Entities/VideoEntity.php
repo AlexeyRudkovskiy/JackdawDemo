@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\DashboardComponents\NavigationLink;
+use Jackdaw\Fields\IdField;
 use Jackdaw\Fields\TextField;
 
 class VideoEntity extends AbstractEntity
@@ -20,7 +21,7 @@ class VideoEntity extends AbstractEntity
     public function getFields(): Collection
     {
         return collect([])
-            ->add(new TextField("id"))
+            ->add(new IdField("id"))
             ->add(new TextField("title"));
     }
 

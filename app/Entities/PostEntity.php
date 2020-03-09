@@ -96,14 +96,21 @@ class PostEntity extends AbstractEntity
         ];
     }
 
-    public function getCards(): array
+    public function getCards(string $position): array
     {
-        return [
-            (new Card())
-                ->setCounter(100)
-                ->setHeader('All Posts')
-                ->setSubheader('Number of all created posts')
-        ];
+        if ($position === 'index') {
+            return [
+                (new Card())
+                    ->setCounter(100)
+                    ->setHeader('All Posts')
+                    ->setSubheader('Number of all created posts')
+                    ->setPosition('index')
+            ];
+        } else if ($position === 'show') {
+            return [];
+        }
+
+        return [];
     }
 
     public function bindAdditionalRoutes()
@@ -127,7 +134,9 @@ class PostEntity extends AbstractEntity
                     ->with('entity', $this)
                     ->with('rootEntity', $this)
                     ->with('rootObject', $post)
+                    ->with('object', $post)
                     ->with('post', $post)
+                    ->with('page', 'statistics')
                 ;
         })->name('statistics');
     }
@@ -144,18 +153,6 @@ class PostEntity extends AbstractEntity
         $currentPage = request()->route()->getName();
 
         return [
-            (new NavigationLink())
-                ->setBadge(20)
-                ->setTitle('hello world')
-                ->setUrl(route('dashboard.posts.hello-world'))
-                ->setIsActive($currentPage === 'dashboard.posts.hello-world')
-                ->setPosition('tabs.index'),
-            (new NavigationLink())
-                ->setBadge(59)
-                ->setTitle('Settings')
-                ->setUrl(route('dashboard.posts.settings'))
-                ->setIsActive($currentPage === 'dashboard.posts.settings')
-                ->setPosition('tabs.index'),
             (new NavigationLink())
                 ->setBadge(0)
                 ->setTitle('Statistics')

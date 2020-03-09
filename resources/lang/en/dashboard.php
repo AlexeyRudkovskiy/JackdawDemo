@@ -12,7 +12,8 @@ return [
 
     'posts' => [
         'tabs' => [
-            'root' => 'Post'
+            'root' => 'Post',
+            'index' => 'All Posts'
         ],
         'sidebar' => [
             'label' => 'Posts'
@@ -28,7 +29,13 @@ return [
     'videos' => [
         'sidebar' => [
             'label' => 'Videos'
-        ]
+        ],
+        'table' => [
+            'field' => [
+                'id' => 'ID',
+                'title' => 'Title'
+            ],
+        ],
     ],
 
     'tags' => [
