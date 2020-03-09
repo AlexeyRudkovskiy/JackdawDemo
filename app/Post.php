@@ -12,6 +12,10 @@ class Post extends Model
 
     use EntityModel;
 
+    protected $fillable = [
+        'title'
+    ];
+
     protected $childMaps = [
         TagEntity::class => 'tags',
         VideoEntity::class => 'videos'

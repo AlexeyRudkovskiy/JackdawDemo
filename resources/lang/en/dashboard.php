@@ -24,6 +24,11 @@ return [
                 'title' => 'Title'
             ]
         ],
+        'edit' => [
+            'field' => [
+                'title' => 'Title'
+            ]
+        ]
     ],
 
     'videos' => [
@@ -42,6 +47,12 @@ return [
         'table' => [
             'field' => [
                 'id' => 'ID',
+                'text' => 'Text',
+                'slug' => 'Slug'
+            ]
+        ],
+        'edit' => [
+            'field' => [
                 'text' => 'Text',
                 'slug' => 'Slug'
             ]

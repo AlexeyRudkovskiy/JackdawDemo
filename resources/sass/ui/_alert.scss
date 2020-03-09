@@ -33,8 +33,21 @@
     left: 16px;
   }
 
+    &.alert-without-action {
+        &::before {
+            top:  16px;
+            left: 16px;
+        }
+
+        .alert-message {
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+    }
+
   .alert-message {
     margin-bottom: var(--default-padding);
     font-size: 1rem;
   }
+
 }

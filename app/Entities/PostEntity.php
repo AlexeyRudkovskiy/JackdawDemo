@@ -12,6 +12,7 @@ use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\Contracts\FieldContract;
 use Jackdaw\DashboardComponents\Card;
 use Jackdaw\Fields\IdField;
+use Jackdaw\Fields\SaveOrUpdateField;
 use Jackdaw\Fields\TextField;
 use Jackdaw\DashboardComponents\NavigationLink;
 
@@ -30,17 +31,25 @@ class PostEntity extends AbstractEntity
     {
         return collect([])
             ->add(new IdField("id"))
-            ->add(new TextField("title"));
+            ->add(new TextField("title"))
+            ->add(new SaveOrUpdateField('save'))
+        ;
     }
 
     public function getEditableFields(): array
     {
         return [
             'content' => [
-                'title'
+                [
+                    'title' => 'Content',
+                    'fields' => [ 'title' ]
+                ]
             ],
             'sidebar' => [
-                'title'
+                [
+                    'title' => 'Basic information',
+                    'fields' => [ 'title', 'save' ]
+                ],
             ]
         ];
     }
@@ -53,6 +62,13 @@ class PostEntity extends AbstractEntity
     public function getShowMode(): string
     {
         return EntityShowMode::EDIT;
+    }
+
+    public function getValidation(): array
+    {
+        return [
+            'title' => 'required'
+        ];
     }
 
     public function getTranslations(): array
@@ -139,13 +155,6 @@ class PostEntity extends AbstractEntity
                     ->with('page', 'statistics')
                 ;
         })->name('statistics');
-    }
-
-    public function bindAdditionalApiRoutes()
-    {
-        \Route::get('hello-world', function () {
-            return [ 'posts' => 100 ];
-        });
     }
 
     public function getNavigation($recordId): array

@@ -1,0 +1,45 @@
+@import "variables";
+
+$sidebar-min-width: 250px;
+$sidebar-max-width: 350px;
+
+.entity-editor {
+    display: flex;
+    width: 100%;
+
+    .col-content, .col-sidebar {
+        box-sizing: border-box;;
+    }
+
+    .col-content {
+        padding-right: $default-padding / 2;
+        width: 100%;
+
+        .alert {
+            margin-bottom: $default-padding;
+        }
+    }
+
+    .col-sidebar {
+        padding-left: $default-padding / 2;
+
+        min-width: $sidebar-min-width;
+        max-width: $sidebar-max-width;
+        width: 100%;
+        margin-left: auto;
+
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    .entity-editor-section {
+        & + .entity-editor-section {
+            margin-top: $default-padding;
+        }
+
+        .entity-editor-section-header {
+            font-weight: bold;
+        }
+    }
+
+}

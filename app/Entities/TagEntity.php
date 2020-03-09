@@ -10,6 +10,7 @@ use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
 use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\Fields\IdField;
+use Jackdaw\Fields\SaveOrUpdateField;
 use Jackdaw\Fields\TextField;
 
 class TagEntity extends AbstractEntity
@@ -24,13 +25,20 @@ class TagEntity extends AbstractEntity
             ->push(new IdField("id"))
             ->push(new TextField("text"))
             ->push(new TextField("slug"))
-            ;
+            ->push(new SaveOrUpdateField('save'))
+        ;
     }
 
     public function getEditableFields(): array
     {
         return [
-            'text'
+            'sidebar' => [
+                [
+                    'title' => 'test',
+                    'fields' => [ 'text', 'slug', 'save' ]
+                ]
+            ],
+            'content' => []
         ];
     }
 
@@ -41,7 +49,7 @@ class TagEntity extends AbstractEntity
 
     public function getShowMode(): string
     {
-        return EntityShowMode::DETAILS;
+        return EntityShowMode::EDIT;
     }
 
     public function getTranslations(): array
