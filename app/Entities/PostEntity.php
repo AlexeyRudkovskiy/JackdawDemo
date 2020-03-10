@@ -4,6 +4,7 @@
 namespace App\Entities;
 
 
+use App\Http\Resources\PostCollection;
 use App\Post;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
@@ -127,6 +128,16 @@ class PostEntity extends AbstractEntity
         }
 
         return [];
+    }
+
+    public function getApiResource(): ?string
+    {
+        return \App\Http\Resources\Post::class;
+    }
+
+    public function getApiCollectionResource(): ?string
+    {
+        return PostCollection::class;
     }
 
     public function bindAdditionalRoutes()

@@ -802,7 +802,7 @@ h2 {
 .entity-editor .col-sidebar {
   padding-left: 8px;
   min-width: 250px;
-  max-width: 350px;
+  max-width: 450px;
   width: 100%;
   margin-left: auto;
   flex-shrink: 0;
