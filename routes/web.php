@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test/{post}', function (\App\Post $post) {
-    return new \App\Http\Resources\PostCollection(\App\Post::paginate(1));
+Route::get('test', function () {
+    session()->flash('test', 1);
+    return 1;
+});
+
+Route::get('foo', function () {
+    dd(session()->all());
+    return 1;
 });
