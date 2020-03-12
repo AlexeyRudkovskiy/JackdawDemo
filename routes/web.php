@@ -26,3 +26,7 @@ Route::get('foo', function () {
     dd(session()->all());
     return 1;
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

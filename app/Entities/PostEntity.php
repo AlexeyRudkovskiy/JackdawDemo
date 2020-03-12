@@ -20,6 +20,7 @@ use Jackdaw\Fields\RelationshipField;
 use Jackdaw\Fields\SaveOrUpdateField;
 use Jackdaw\Fields\TextField;
 use Jackdaw\DashboardComponents\NavigationLink;
+use Jackdaw\Fields\WysiwygField;
 
 class PostEntity extends AbstractEntity
 {
@@ -37,7 +38,7 @@ class PostEntity extends AbstractEntity
         return collect([])
             ->add(new IdField("id"))
             ->add(new TextField("title"))
-            ->add(new TextField('content'))
+            ->add(new WysiwygField('content'))
             ->add(
                 (new RelationshipField('user_id'))
                     ->setIsMany(false)
@@ -96,7 +97,7 @@ class PostEntity extends AbstractEntity
                     'fields' => [ 'tags', 'videos' ]
                 ],
                 [
-                    'title' => 'Actions',
+                    'title' => null,
                     'fields' => [ 'save' ]
                 ]
             ]

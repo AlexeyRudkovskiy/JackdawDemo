@@ -1,9 +1,15 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import actions from './actions'
 
-// any CSS you require will output into a single css file (app.css in this case)
+(() => {
+    const tag = document.body.getAttribute('data-page-id');
 
+    const runActions = (tag) => {
+        const _actions = actions[tag];
+        if (typeof _actions !== "undefined") {
+            _actions.forEach(action => action.call(window))
+        }
+    };
+
+    runActions('general');
+    runActions(tag);
+})();
