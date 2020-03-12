@@ -121,8 +121,8 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\Projects\PhpStormProjects\ldash\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! G:\Projects\PhpStormProjects\ldash\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/alexey/PhpstormProjects/JackdawDemo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/alexey/PhpstormProjects/JackdawDemo/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

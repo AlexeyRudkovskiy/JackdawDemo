@@ -13,7 +13,7 @@ class Post extends Model
     use EntityModel;
 
     protected $fillable = [
-        'title'
+        'title', 'user_id', 'video_id', 'content'
     ];
 
     protected $childMaps = [
@@ -37,6 +37,11 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class);
     }
 
 }

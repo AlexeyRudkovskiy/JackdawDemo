@@ -995,6 +995,12 @@ form .form-group .form-control:focus {
   box-shadow: 0 0 0 3px var(--control-focus-border-shadow-color);
 }
 
+form .form-group .form-group-list .input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: var(--half-padding);
+}
+
 .details-container {
   box-sizing: border-box;
   padding: var(--default-padding);

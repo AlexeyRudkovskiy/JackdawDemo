@@ -31,6 +31,11 @@ class TagEntity extends AbstractEntity
 
     public function getEditableFields(): array
     {
+        return [ 'text', 'slug' ];
+    }
+
+    public function getEditorLayout(): array
+    {
         return [
             'sidebar' => [
                 [

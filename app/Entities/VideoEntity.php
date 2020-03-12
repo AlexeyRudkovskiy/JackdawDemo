@@ -30,6 +30,11 @@ class VideoEntity extends AbstractEntity
         return [ 'title' ];
     }
 
+    public function getEditorLayout(): array
+    {
+        return [ 'title' ];
+    }
+
     public function getTableFields(): array
     {
         return [ 'id', 'title' ];

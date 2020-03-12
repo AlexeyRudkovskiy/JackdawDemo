@@ -26,7 +26,11 @@ return [
         ],
         'edit' => [
             'field' => [
-                'title' => 'Title'
+                'title' => 'Title',
+                'user_id' => 'Author',
+                'video_id' => 'Video',
+                'tags' => 'Tags',
+                'videos' => 'Videos'
             ]
         ]
     ],

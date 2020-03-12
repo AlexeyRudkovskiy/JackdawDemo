@@ -6,6 +6,9 @@ namespace App\Entities;
 
 use App\Http\Resources\PostCollection;
 use App\Post;
+use App\Tag;
+use App\User;
+use App\Video;
 use Illuminate\Support\Collection;
 use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
@@ -13,6 +16,7 @@ use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\Contracts\FieldContract;
 use Jackdaw\DashboardComponents\Card;
 use Jackdaw\Fields\IdField;
+use Jackdaw\Fields\RelationshipField;
 use Jackdaw\Fields\SaveOrUpdateField;
 use Jackdaw\Fields\TextField;
 use Jackdaw\DashboardComponents\NavigationLink;
@@ -33,6 +37,35 @@ class PostEntity extends AbstractEntity
         return collect([])
             ->add(new IdField("id"))
             ->add(new TextField("title"))
+            ->add(new TextField('content'))
+            ->add(
+                (new RelationshipField('user_id'))
+                    ->setIsMany(false)
+                    ->setRelatedModel(User::class)
+                    ->setModelField('user')
+                    ->setDisplayField('emailAndUsername')
+            )
+            ->add(
+                (new RelationshipField('video_id'))
+                    ->setIsMany(false)
+                    ->setRelatedModel(Video::class)
+                    ->setModelField('video')
+                    ->setDisplayField('title')
+            )
+            ->add(
+                (new RelationshipField('tags'))
+                    ->setIsMany(true)
+                    ->setRelatedModel(Tag::class)
+                    ->setModelField('tags')
+                    ->setDisplayField('text')
+            )
+            ->add(
+                (new RelationshipField('videos'))
+                    ->setIsMany(true)
+                    ->setRelatedModel(Video::class)
+                    ->setModelField('videos')
+                    ->setDisplayField('title')
+            )
             ->add(new SaveOrUpdateField('save'))
         ;
     }
@@ -40,17 +73,32 @@ class PostEntity extends AbstractEntity
     public function getEditableFields(): array
     {
         return [
+            'title', 'user_id', 'video_id', 'tags', 'videos'
+        ];
+    }
+
+    public function getEditorLayout(): array
+    {
+        return [
             'content' => [
                 [
                     'title' => 'Content',
-                    'fields' => [ 'title' ]
+                    'fields' => [ 'content' ]
                 ]
             ],
             'sidebar' => [
                 [
                     'title' => 'Basic information',
-                    'fields' => [ 'title', 'save' ]
+                    'fields' => [ 'title', 'user_id', 'video_id' ]
                 ],
+                [
+                    'title' => 'Many related objects',
+                    'fields' => [ 'tags', 'videos' ]
+                ],
+                [
+                    'title' => 'Actions',
+                    'fields' => [ 'save' ]
+                ]
             ]
         ];
     }
