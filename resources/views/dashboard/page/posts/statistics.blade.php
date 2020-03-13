@@ -5,6 +5,6 @@
     <p>Post ID: {{ $post->id }}</p>
     <p>Tags count: {{ $post->tags()->count() }}</p>
     <p>Videos count: {{ $post->videos()->count() }}</p>
-
+    
     <a href="javascript:" class="button">Delete this post</a>
 @endsection

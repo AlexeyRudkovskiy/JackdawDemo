@@ -30,3 +30,7 @@ Route::get('foo', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('testing', function () {
+    return 123;
+})->name('first_extension.settings2');

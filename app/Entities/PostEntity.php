@@ -14,6 +14,8 @@ use Jackdaw\Contracts\AbstractEntity;
 use Jackdaw\Contracts\EntityContract;
 use Jackdaw\Contracts\EntityShowMode;
 use Jackdaw\Contracts\FieldContract;
+use Jackdaw\Contracts\RequestManagerContract;
+use Jackdaw\Contracts\ResponseManagerContract;
 use Jackdaw\DashboardComponents\Card;
 use Jackdaw\Fields\IdField;
 use Jackdaw\Fields\RelationshipField;
@@ -201,19 +203,16 @@ class PostEntity extends AbstractEntity
                 ->with('entity', $this);
         })->name('settings');
 
-        \Route::get('/{post}/statistics', function (int $postId) {
-            $this->buildTabs();
+        \Route::get('/{post}/statistics', function (RequestManagerContract $requestManager, ResponseManagerContract $responseManager) {
+            $this->buildMenu();
 
-            $post = Post::findOrFail($postId);
+            $post = $requestManager->getPrimaryObject();
 
-            return view('dashboard.page.posts.statistics')
-                    ->with('entity', $this)
-                    ->with('rootEntity', $this)
-                    ->with('rootObject', $post)
-                    ->with('object', $post)
-                    ->with('post', $post)
-                    ->with('page', 'statistics')
-                ;
+            $view = view('dashboard.page.posts.statistics')
+                ->with('page', 'statistics')
+                ->with('post', $post);
+
+            return $responseManager->wrapResponse($view);
         })->name('statistics');
     }
 

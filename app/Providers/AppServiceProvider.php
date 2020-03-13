@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\DashboardExtensions\FirstExtension;
 use App\Entities\PostEntity;
 use App\Entities\TagEntity;
 use App\Entities\VideoEntity;
@@ -9,6 +10,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Jackdaw\Contracts\DashboardContract;
 use Jackdaw\Contracts\EntityContract;
+use Jackdaw\Contracts\NavigationLinkContract;
+use Jackdaw\DashboardComponents\NavigationLink;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,15 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         /** @var DashboardContract $dashboard */
         $dashboard = $this->app->make(DashboardContract::class);
-        $dashboard
-            ->addEntity(new PostEntity())
-            ->addEntity(new VideoEntity())
-            ->setSidebarBuilder(function (Collection $entities) {
-                return $entities->groupBy(function (EntityContract $entityContract) {
-                    return $entityContract->getSidebarSectionName();
-                });
-            })
-            ->done();
     }
 
     /**
@@ -40,6 +34,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /** @var DashboardContract $dashboard */
+        $dashboard = $this->app->make(DashboardContract::class);
+
+        $dashboard
+            ->addEntity(new PostEntity())
+            ->addEntity(new VideoEntity())
+            ->setSidebarBuilder(function (Collection $entities, Collection $additionalLinks) use ($dashboard) {
+                return $entities
+                    ->map(function (EntityContract $entity) use ($dashboard) {
+                        return $dashboard->createLinkForEntity($entity);
+                    })
+                    ->merge($additionalLinks)
+                    ->sortBy(function (NavigationLinkContract $link) {
+                        return $link->getOrderIndex();
+                    })
+                    ->groupBy(function (NavigationLinkContract $link) {
+                        return $link->getSection();
+                    });
+            })
+            ->registerExtension(new FirstExtension())
+            ->done();
     }
 }

@@ -5,7 +5,8 @@ return [
     'general' => [
         'sidebar' => [
             'section' => [
-                'entities' => 'Entities'
+                'entities' => 'Entities',
+                'other' => 'Other'
             ]
         ],
     ],
