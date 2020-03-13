@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Route;
 use Jackdaw\Contracts\DashboardContract;
 use Jackdaw\Contracts\ExtensionContract;
+use Jackdaw\Contracts\ExtensionsManagerContract;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -46,8 +47,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $dashboard = app()->make(DashboardContract::class);
-        $extensions = $dashboard->getExtensions();
+        /** @var ExtensionsManagerContract $extensionsManager */
+        $extensionsManager = app()->make(ExtensionsManagerContract::class);
+        $extensions = $extensionsManager->getAllExtensions();
 
         /** @var ExtensionContract $extension */
         foreach ($extensions as $extension) {

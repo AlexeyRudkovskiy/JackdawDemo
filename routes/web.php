@@ -31,6 +31,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('testing', function () {
-    return 123;
+Route::get('post2/{post}', function ($post) {
+    return $post;
 })->name('first_extension.settings2');

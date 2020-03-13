@@ -1,1 +1,1 @@
-Second component
+Current datetime: {{ now() }}

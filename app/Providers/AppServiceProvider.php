@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\DashboardExtensions\FirstExtension;
+use App\DashboardExtensions\FirstExtension\FirstExtension;
 use App\Entities\PostEntity;
 use App\Entities\TagEntity;
 use App\Entities\VideoEntity;
@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Jackdaw\Contracts\DashboardContract;
 use Jackdaw\Contracts\EntityContract;
+use Jackdaw\Contracts\ExtensionsManagerContract;
 use Jackdaw\Contracts\NavigationLinkContract;
 use Jackdaw\DashboardComponents\NavigationLink;
 
@@ -36,6 +37,9 @@ class AppServiceProvider extends ServiceProvider
     {
         /** @var DashboardContract $dashboard */
         $dashboard = $this->app->make(DashboardContract::class);
+        $extensionsManager = $this->app->make(ExtensionsManagerContract::class);
+
+        $extensionsManager->registerExtension(new FirstExtension());
 
         $dashboard
             ->addEntity(new PostEntity())
@@ -53,7 +57,6 @@ class AppServiceProvider extends ServiceProvider
                         return $link->getSection();
                     });
             })
-            ->registerExtension(new FirstExtension())
             ->done();
     }
 }
