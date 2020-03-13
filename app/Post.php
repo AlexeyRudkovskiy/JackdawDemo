@@ -6,11 +6,13 @@ use App\Entities\TagEntity;
 use App\Entities\VideoEntity;
 use Illuminate\Database\Eloquent\Model;
 use Jackdaw\Entities\EntityModel;
+use Jackdaw\Entities\Metable;
 
 class Post extends Model
 {
 
     use EntityModel;
+    use Metable;
 
     protected $fillable = [
         'title', 'user_id', 'video_id', 'content'

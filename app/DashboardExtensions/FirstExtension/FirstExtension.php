@@ -4,8 +4,10 @@
 namespace App\DashboardExtensions;
 
 
+use App\Entities\PostEntity;
 use Jackdaw\Contracts\DashboardContract;
 use Jackdaw\Contracts\ExtensionContract;
+use Jackdaw\Contracts\ExtensionsManagerContract;
 use Jackdaw\Contracts\RequestManagerContract;
 use Jackdaw\DashboardComponents\NavigationLink;
 
@@ -30,9 +32,16 @@ class FirstExtension implements ExtensionContract
         $dashboard->addSidebarLink($firstLink);
     }
 
-    public function register(DashboardContract $dashboard)
+    public function register(ExtensionsManagerContract $extensionsMangaer)
     {
 
+    }
+
+    public function getTargets(): array
+    {
+        return [
+            PostEntity::class
+        ];
     }
 
 }
