@@ -1,5 +1,7 @@
 import actions from './actions'
 
+import SimpleComponent from "./components/SimpleComponent";
+
 (() => {
     const tag = document.body.getAttribute('data-page-id');
 

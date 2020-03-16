@@ -1,0 +1,78 @@
+@import "../variables";
+
+.side-section-wrapper {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    background-color: rgba(black, 0.5);
+
+    z-index: $base-z-index;
+
+    .side-section-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 350px;
+        height: 100vh;
+        overflow-y: scroll;
+
+        background-color: white;
+        box-shadow: -3px 0 12px rgba(black, 0.25);
+
+        .side-section-header {
+            display: flex;
+            align-items: center;
+
+            background-color: $dark-color;
+            color: rgba(white, 0.75);
+            font-weight: bold;
+            text-transform: uppercase;
+
+            .header-text {
+                padding: var(--default-padding);
+            }
+
+            .header-close {
+                margin-left: auto;
+                cursor: pointer;
+
+                .close-icon {
+                    padding: var(--default-padding);
+                }
+            }
+        }
+
+        .side-section-select-list {
+
+            padding-top: var(--default-padding);
+            padding-bottom: var(--default-padding);
+
+            .select-item {
+                padding: var(--default-padding);
+                cursor: pointer;
+
+                &:hover, &.active {
+                    background-color: rgba(0, 0, 0, 0.05);
+                }
+
+                &.active {
+                    position: relative;
+
+                    &::after {
+                        content: url("/assets/dashboard/icons/check.svg");
+                        position: absolute;
+                        top:   10px;
+                        right: 10px;
+                        width:  32px;
+                        height: 32px;
+                    }
+                }
+            }
+
+        }
+    }
+}

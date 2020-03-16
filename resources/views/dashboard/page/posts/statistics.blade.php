@@ -2,9 +2,15 @@
 
 @section('content')
     <h2>Statistics page</h2>
-    <p>Post ID: {{ $post->id }}</p>
-    <p>Tags count: {{ $post->tags()->count() }}</p>
-    <p>Videos count: {{ $post->videos()->count() }}</p>
-    
-    <a href="javascript:" class="button">Delete this post</a>
+
+    <div class="vertical-spacer"></div>
+
+    <div class="simple-component">
+        <select name="prefix11">
+            <option value="1">Testing123</option>
+            <option value="2">Hello World!</option>
+            <option value="3">Foo</option>
+            <option value="4">Bar</option>
+        </select>
+    </div>
 @endsection
